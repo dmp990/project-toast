@@ -6,7 +6,7 @@ import styles from "./ToastShelf.module.css";
 function ToastShelf({ shelf, handleDismiss }) {
   return (
     <ol className={styles.wrapper}>
-      {shelf.map((item) => {
+      {shelf.map((item, index) => {
         return (
           <li className={styles.toastWrapper} key={item.id}>
             <Toast
