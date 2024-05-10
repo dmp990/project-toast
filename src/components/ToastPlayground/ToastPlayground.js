@@ -21,6 +21,20 @@ function ToastPlayground({ defaultVariant = "notice" }) {
     });
   }
 
+  function AddToastToShelf(event) {
+    event.preventDefault();
+    setShelf([
+      ...shelf,
+      {
+        id: `${Math.random()}`,
+        variant: variantSelected,
+        message: message,
+      },
+    ]);
+    setMessage("");
+    setVariantSelected(defaultVariant);
+  }
+
   return (
     <div className={styles.wrapper}>
       <header>
@@ -29,21 +43,7 @@ function ToastPlayground({ defaultVariant = "notice" }) {
       </header>
 
       <ToastShelf shelf={shelf} handleDismiss={handleDismiss} />
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          setShelf([
-            ...shelf,
-            {
-              id: `${Math.random()}`,
-              variant: variantSelected,
-              message: message,
-            },
-          ]);
-          setMessage("");
-          setVariantSelected(defaultVariant);
-        }}
-      >
+      <form onSubmit={AddToastToShelf}>
         <div className={styles.controlsWrapper}>
           <div className={styles.row}>
             <label
