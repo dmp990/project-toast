@@ -1,7 +1,7 @@
 import React from "react";
 
 import Button from "../Button";
-import Toast from "../Toast";
+import { ToastContext } from "../ToastProvider/ToastProvider";
 
 import styles from "./ToastPlayground.module.css";
 import ToastShelf from "../ToastShelf/ToastShelf";
@@ -9,17 +9,9 @@ import ToastShelf from "../ToastShelf/ToastShelf";
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground({ defaultVariant = "notice" }) {
+  const { shelf, setShelf } = React.useContext(ToastContext);
   const [message, setMessage] = React.useState("");
   const [variantSelected, setVariantSelected] = React.useState(defaultVariant);
-  const [shelf, setShelf] = React.useState([]);
-
-  function handleDismiss(index) {
-    setShelf((currentShelf) => {
-      const copyShelf = JSON.parse(JSON.stringify(currentShelf));
-      copyShelf.splice(index, 1);
-      return copyShelf;
-    });
-  }
 
   function AddToastToShelf(event) {
     event.preventDefault();
@@ -42,7 +34,7 @@ function ToastPlayground({ defaultVariant = "notice" }) {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf shelf={shelf} handleDismiss={handleDismiss} />
+      <ToastShelf />
       <form onSubmit={AddToastToShelf}>
         <div className={styles.controlsWrapper}>
           <div className={styles.row}>
