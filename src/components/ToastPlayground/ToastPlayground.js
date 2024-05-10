@@ -13,33 +13,10 @@ function ToastPlayground({ defaultVariant = "notice" }) {
   const [variantSelected, setVariantSelected] = React.useState(defaultVariant);
   const [shelf, setShelf] = React.useState([]);
 
-  /* 
-                  {
-                    id: `${Math.random()}`,
-                    variant: variantSelected,
-                    message: message,
-                  },
-  */
-
   function handleDismiss(index) {
-    //console.log("Index to remove is: " + index);
     setShelf((currentShelf) => {
-      //console.log("Current State: ", currentShelf);
-      /*
-      const copyShelf = [];
-      for (let i = 0; i < currentShelf.length; i++) {
-        const copyItem = {};
-        const keys = Object.keys(currentShelf[i]);
-        for (let j = 0; j < keys.length; j++) {
-          copyItem[keys[j]] = currentShelf[i][keys[j]];
-        }
-        copyShelf.push(copyItem);
-      }
-      */
-      // const ingredientsListDeepCopy = JSON.parse(JSON.stringify(ingredientsList));
       const copyShelf = JSON.parse(JSON.stringify(currentShelf));
       copyShelf.splice(index, 1);
-      //console.log("Changed State: ", copyShelf);
       return copyShelf;
     });
   }
