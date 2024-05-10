@@ -13,6 +13,20 @@ function ToastPlayground({ defaultVariant = "notice" }) {
   const [message, setMessage] = React.useState("");
   const [variantSelected, setVariantSelected] = React.useState(defaultVariant);
 
+  React.useEffect(() => {
+    function handleEscapeKey(event) {
+      if (event.key === "Escape") {
+        setShelf([]);
+      }
+    }
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
+
   function AddToastToShelf(event) {
     event.preventDefault();
     setShelf([
